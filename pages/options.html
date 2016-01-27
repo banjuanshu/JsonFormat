@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON-BJS options</title>
+<script type="text/javascript" src="/assets/options.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/options.css" />
+</head>
+<body>
+	<div id="main">
+		<div>
+			<h2><img alt="icon" id="icon" src="/img/foobar.png"/>JSON-BJS options</h2>
+			<hr>
+			<div class="optionBlock">
+				<label for="addContextMenuInput">添加菜单项</label>
+				<input type="checkbox" id="addContextMenuInput">
+			</div>
+			<div class="optionBlock">
+				<label for="safeMethodInput">使用安全的方法解析HTTP响应（*）</label>
+				<input type="checkbox" id="safeMethodInput">
+			</div>			
+			<div class="optionBlock">
+				<label for="injectInFrameInput">注入框架</label>
+				<input type="checkbox" id="injectInFrameInput">
+			</div>
+			<div class="optionBlock">
+				<label for="openStyleInput">风格编辑器创建自定义主题</label>
+				<button id="open-editor">编辑</button>
+			</div>
+			<p>（*）安全的方法迫使浏览器发送一个额外的HTTP请求获得原始HTTP内容。</p>
+		</div>
+	</div>
+</body>
+</html>
