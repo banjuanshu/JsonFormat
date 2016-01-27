@@ -7,4 +7,4 @@
 
 
 # Install
-<a href="https://chrome.google.com/webstore/detail/jsonbjs/elkijihmlkiopckafeadaodcaifolkjb">点击安装</a>
+<a target="_blank" href="https://chrome.google.com/webstore/detail/jsonbjs/elkijihmlkiopckafeadaodcaifolkjb">点击安装</a>
