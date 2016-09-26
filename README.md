@@ -6,7 +6,5 @@
 # api返回结果直接格式化
 
 
-
-
 # Install
 <a target="_blank" href="https://chrome.google.com/webstore/detail/jsonbjs/elkijihmlkiopckafeadaodcaifolkjb">点击安装</a>
