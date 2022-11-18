@@ -13,7 +13,7 @@
       "128": "/img/foobar.png"
    },
    "manifest_version": 2,
-   "name": "JSONBJS",
+   "name": "JsonParse",
    "omnibox": {
       "keyword": "jv"
    },
