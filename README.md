@@ -8,3 +8,9 @@
 
 # Install
 <a target="_blank" href="https://chrome.google.com/webstore/detail/jsonbjs/elkijihmlkiopckafeadaodcaifolkjb">点击安装</a>
+
+
+```css
+
+ "css": [ "/css/json.css", "/css/json-core.css", "/css/content_error.css"],
+```

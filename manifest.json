@@ -1,24 +1,28 @@
 {
-   "background": {
-      "scripts": [ "/assets/background.js", "/assets/omnibox.js" ]
-   },
+   "manifest_version": 3,
+   "name": "Json Format",
+   "description": "一款轻量级的JSON格式化工具",
+   "version": "2.4",
    "content_scripts": [ {
       "all_frames": true,
-      "js": [ "/assets/content.js" ],
-      "matches": [ "http://*/*", "https://*/*", "ftp://*/*", "file:///*" ],
-      "run_at": "document_end"
-   } ],
-   "description": "解析JSON文档, 并支持地址栏搜索(jv命令),jv命令支持unicode转中文.",
+      "matches": ["http://*/*","https://*/*","<all_urls>"],
+      "js": [  "js/viewer.js" ],
+      "run_at": "document_idle"
+   }],
    "icons": {
-      "128": "/img/foobar.png"
+      "16": "img/json16.png",
+      "48": "img/json48.png",
+      "128": "img/json128.png"
    },
-   "manifest_version": 3,
-   "name": "JsonParse",
-   "omnibox": {
-      "keyword": "jv"
-   },
-   "options_page": "pages/options.html",
-   "permissions": [ "clipboardWrite", "http://*/", "contextMenus", "https://*/", "ftp://*/" ],
-   "version": "2.3",
-   "web_accessible_resources": [ "/css/json.css", "/css/json-core.css", "/css/content_error.css", "/img/options.png", "/img/close_icon.gif", "/img/error.gif", "/pages/json_content.html" ]
+   "permissions": [
+   ],
+   "host_permissions": [
+      "*://*/*"
+   ],
+   "web_accessible_resources": [
+      {
+         "resources": [ "/css/json.css", "/css/json-core.css" ],
+         "matches": [ "http://*/*","https://*/*","<all_urls>" ]
+      }
+   ]
 }
