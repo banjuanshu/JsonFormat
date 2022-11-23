@@ -123,10 +123,12 @@ function load(){
     } catch (e) {
     }
 
-    // chrome.tabs.executeScript(null, { file: "css/json.css" });
+
 
     injectCustomCss("css/json.css")
     injectCustomCss("css/json-core.css")
+
+    // chrome.tabs.executeScript(null, { file: "css/json.css" });
 
     // chrome.tabs.insertCSS(tabs[0].id, { file: "css/json-core.css" });
     // chrome.tabs.InjectDetails({ file: "css/json-core.css" });
