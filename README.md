@@ -7,7 +7,7 @@
 
 
 # Install
-<a target="_blank" href="https://chrome.google.com/webstore/detail/jsonbjs/elkijihmlkiopckafeadaodcaifolkjb">点击安装</a>
+<a target="_blank" href="https://chrome.google.com/webstore/detail/json-format/cacimhdphkcihjfpnpmmndgjjnnfoobm?hl=zh-CN&authuser=0">点击安装</a>
 
 
 ```css
