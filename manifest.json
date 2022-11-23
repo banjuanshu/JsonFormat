@@ -1,7 +1,6 @@
 {
    "manifest_version": 3,
    "name": "Json Format",
-   "description": "一款轻量级的JSON格式化工具",
    "version": "2.4",
    "content_scripts": [ {
       "all_frames": true,
