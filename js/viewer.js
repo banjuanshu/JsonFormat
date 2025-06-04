@@ -92,7 +92,7 @@ function injectCustomCss(cssPath) {
 }
 // injectJS
 function injectCustomJs(jsPath) {
-    jsPath = jsPath || "css/json.css";
+    jsPath = jsPath || "js/inject.js";
     var temp = document.createElement("script");
     temp.setAttribute("type", "text/javascript"); // 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
     temp.setAttribute("src", chrome.runtime.getURL(jsPath));
@@ -107,10 +107,11 @@ function injectCustomJs(jsPath) {
 
 function load(){
     function test(text) {
+        text = text.trim();
         return ((text.charAt(0) == "[" && text.charAt(text.length - 1) == "]") || (text.charAt(0) == "{" && text.charAt(text.length - 1) == "}"));
     }
 
-    html = document.body.innerText;
+    var html = document.body.innerText;
 
     if(! test(html)){
         return false;
@@ -119,7 +120,7 @@ function load(){
 
     var object;
     try {
-        object = JSON.parse(document.body.innerText);
+        object = JSON.parse(html.trim());
     } catch (e) {
     }
 
