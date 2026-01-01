@@ -1,0 +1,27 @@
+{
+  "name": "jsonformat",
+  "version": "1.0.0",
+  "description": "一款轻量级的JSON格式化Chrome browser extension. 适配 Manifest V3.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banjuanshu/JsonFormat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/banjuanshu/JsonFormat/issues"
+  },
+  "homepage": "https://github.com/banjuanshu/JsonFormat#readme",
+  "devDependencies": {
+    "adm-zip": "^0.5.16",
+    "clean-css-cli": "^5.6.3",
+    "fs-extra": "^11.3.3",
+    "terser": "^5.44.1"
+  }
+}

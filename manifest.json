@@ -1,7 +1,8 @@
 {
    "manifest_version": 3,
-   "name": "Json Format",
-   "version": "2.4",
+   "name": "JSON Format - Easy & Powerful Viewer",
+   "description": "Lightweight JSON formatter for Chrome. Features include collapsible trees, history records, and side-by-side comparison.",
+   "version": "2.5",
    "content_scripts": [ {
       "all_frames": true,
       "matches": ["http://*/*","https://*/*","<all_urls>"],
