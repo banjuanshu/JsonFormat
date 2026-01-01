@@ -1,5 +1,7 @@
 # JSON Format - Easy & Powerful Viewer
 
+[中文](./README_CN.md)
+
 A lightweight, high-performance, and feature-rich JSON formatter extension for Chrome, fully compatible with Manifest V3.
 
 This extension automatically detects raw JSON content in your browser and presents it in a beautifully formatted, collapsible tree view. It helps developers debug and view JSON data efficiently.
@@ -23,7 +25,7 @@ This extension automatically detects raw JSON content in your browser and presen
 ## Installation
 
 ### From Chrome Web Store
-*(Link to be updated after publication)*
+[Download from Chrome Web Store](https://chromewebstore.google.com/detail/json-format/cacimhdphkcihjfpnpmmndgjjnnfoobm)
 
 ### Manual Installation (Developer Mode)
 

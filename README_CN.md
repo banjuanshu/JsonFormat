@@ -1,5 +1,7 @@
 # JSON Format - 简单强大的 JSON 查看器
 
+[English](./README.md)
+
 一款轻量级、高性能且功能丰富的 Chrome JSON 格式化扩展，完美适配 Manifest V3。
 
 该扩展可以自动检测浏览器中的原始 JSON 内容，并将其转换为美观、易读的可折叠树形结构。帮助开发者更高效地查看和调试 JSON 数据。
@@ -23,7 +25,7 @@
 ## 安装
 
 ### 通过 Chrome 应用商店安装
-*(发布后此处更新链接)*
+[Chrome 应用商店下载](https://chromewebstore.google.com/detail/json-format/cacimhdphkcihjfpnpmmndgjjnnfoobm)
 
 ### 手动安装 (开发者模式)
 
