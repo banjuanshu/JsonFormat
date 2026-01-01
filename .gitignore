@@ -1,8 +1,14 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+# IDE / OS
 .DS_Store
-.idea
-.idea/*
-./dist
-./dist/*
+.idea/
+.vscode/
+
+# build
+dist/
+
+# deps
+node_modules/
+
+# archives
+*.zip
+
