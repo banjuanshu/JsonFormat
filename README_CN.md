@@ -1,3 +1,5 @@
+![JSON Format](promo_1400*560.png)
+
 # JSON Format - 简单强大的 JSON 查看器
 
 [English](./README.md)

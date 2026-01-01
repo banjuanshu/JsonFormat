@@ -1,3 +1,6 @@
+![JSON Format](promo_1400*560.png)
+
+
 # JSON Format - Easy & Powerful Viewer
 
 [中文](./README_CN.md)
