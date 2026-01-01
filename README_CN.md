@@ -1,4 +1,4 @@
-![JSON Format](promo_1400*560.png)
+![image](https://github.com/banjuanshu/JsonFormat/blob/master/promo_1400x560.png)
 
 # JSON Format - 简单强大的 JSON 查看器
 
