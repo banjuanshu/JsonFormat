@@ -12,17 +12,25 @@ This extension automatically detects raw JSON content in your browser and presen
 ## Key Features
 
 - **Auto-Formatting**: Automatically formats JSON responses into a readable tree structure.
-- **Collapsible Trees**: Easily expand and collapse JSON objects and arrays. Click the `-`/`+` icons to toggle visibility.
+- **JSON Editor**: A dedicated page (`editor.html`) for manual JSON input and formatting.
+- **Keyboard Shortcuts**: Press `Alt + J` to quickly open the JSON Editor from any page.
+- **Collapsible Trees**: Easily expand and collapse JSON objects and arrays. Click the `-`/`/` icons or the `{...}` placeholders to toggle visibility.
 - **Syntax Highlighting**: Color-coded output for keys, strings, numbers, booleans, and null values.
+- **Floating Toolbar**: Quick actions at the top right:
+  - **Parsed/Raw View**: Toggle between formatted tree and original text.
+  - **Expand/Collapse All**: One-click to expand or collapse all nodes.
+  - **Copy**: Copy formatted or raw JSON to clipboard.
 - **History Records**: Automatically saves your recent JSON views. Access them from the sidebar to revisit previous data.
 - **Diff Comparison**: Compare the current JSON with any historical record side-by-side.
+  - **Synchronized Scrolling**: Both sides scroll together for easier comparison.
   - **Aligned View**: Keys are aligned for easy comparison.
   - **Color Coding**: Visual indicators for Added (Green), Removed (Red), and Changed (Yellow) fields.
   - **Synchronized Collapsing**: Collapsing a node in the comparison view keeps the structure aligned.
-- **Clickable URLs**: Automatically detects URLs in strings and converts them into clickable links (opening in new tabs).
+- **Clickable URLs**: Automatically detects URLs in strings and converts them into clickable links.
 - **History Management**: 
+  - Collapsible sidebar panel to save space.
   - View timestamps and source URLs for each record.
-  - Resize the history panel by dragging.
+  - Resize the panel by dragging.
   - Clear history with a single click.
 
 ## Installation

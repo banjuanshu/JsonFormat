@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: monospace;
+    background-color: var(--bg-color); /* Use variable */
+    color: var(--text-color); /* Use variable */
+}
+#input-pane {
+    width: 40%;
+    height: 100%;
+    border-right: 1px solid var(--border-color); /* Use variable */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color); /* Use variable */
+}
+#json-input {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+    resize: none;
+    box-sizing: border-box;
+    outline: none;
+    background-color: var(--bg-color); /* Use variable */
+    color: var(--text-color); /* Use variable */
+}
+#output-wrapper {
+    flex: 1;
+    position: relative;
+    background-color: var(--bg-color); /* Use variable */
+    overflow: hidden;
+}
+#editor-toolbar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 10;
+}
+#output-pane {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: var(--bg-color); /* Use variable */
+}
+#error-msg {
+    color: var(--syntax-bool); /* Red-ish */
+    padding: 10px;
+    display: none;
+    border-top: 1px solid var(--border-color);
+    background: var(--diff-removed); /* Red-ish bg */
+}

@@ -1,8 +1,4 @@
 
-function htmlEncode(t) {
-    return t != null ? t.toString().replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
-}
-
 function formatTime(dateInput) {
     var date = new Date(dateInput);
     var y = date.getFullYear();
@@ -12,71 +8,6 @@ function formatTime(dateInput) {
     var i = ('0' + date.getMinutes()).slice(-2);
     var s = ('0' + date.getSeconds()).slice(-2);
     return y + '-' + m + '-' + d + ' ' + h + ':' + i + ':' + s;
-}
-
-function decorateWithSpan(value, className) {
-    return '<span class="' + className + '">' + htmlEncode(value) + '</span>';
-}
-
-function valueToHTML(value) {
-    var valueType = typeof value, output = "";
-    if (value == null)
-        output += decorateWithSpan("null", "type-null");
-    else if (valueType == "number")
-        output += decorateWithSpan(value, "type-number");
-    else if (valueType == "string")
-        if (/^(http|https):\/\/[^\s]+$/.test(value))
-            output += decorateWithSpan('"', "type-string") + '<a href="' + value + '" target="_blank" rel="noopener noreferrer">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
-        else
-            output += decorateWithSpan('"' + value + '"', "type-string");
-    else if (valueType == "boolean")
-        output += decorateWithSpan(value, "type-boolean");
-    else if (typeof value === 'object') {
-        if (Array.isArray(value)) return value.length ? '[...]' : '[]';
-        return Object.keys(value).length ? '{...}' : '{}';
-    }
-    return output;
-}
-
-// --- Standard Viewer ---
-
-function standardArrayToHTML(json) {
-    var i, length, output = '<div class="collapser"></div>[<span class="ellipsis"></span><ul class="array collapsible">', hasContents = false;
-    for (i = 0, length = json.length; i < length; i++) {
-        hasContents = true;
-        output += '<li><div class="hoverable">' + standardValueToHTML(json[i]) + (i < length - 1 ? ',' : '') + '</div></li>';
-    }
-    output += '</ul>]';
-    if (!hasContents) output = "[ ]";
-    return output;
-}
-
-function standardObjectToHTML(json) {
-    var i, key, length, keys = Object.keys(json), output = '<div class="collapser"></div>{<span class="ellipsis"></span><ul class="obj collapsible">', hasContents = false;
-    for (i = 0, length = keys.length; i < length; i++) {
-        key = keys[i];
-        hasContents = true;
-        output += '<li><div class="hoverable"><span class="property">' + htmlEncode(key) + '</span>: ' + standardValueToHTML(json[key]) + (i < length - 1 ? ',' : '') + '</div></li>';
-    }
-    output += '</ul>}';
-    if (!hasContents) output = "{ }";
-    return output;
-}
-
-function standardValueToHTML(value) {
-    var valueType = typeof value;
-    if (value == null) return decorateWithSpan("null", "type-null");
-    if (Array.isArray(value)) return standardArrayToHTML(value);
-    if (valueType == "object") return standardObjectToHTML(value);
-    return valueToHTML(value);
-}
-
-function jsonToHTML(json, fnName) {
-    var output = '';
-    if (fnName) output += '<div class="callback-function">' + fnName + '(</div>';
-    output += '<div id="json">' + standardValueToHTML(json) + '</div>';
-    if (fnName) output += '<div class="callback-function">)</div>';
-    return output;
 }
 
 // --- Diff Logic ---
@@ -199,7 +130,21 @@ function getStoredWidth() {
 function renderHistoryPanel() {
     var panel = document.createElement("div");
     panel.id = "right-panel";
-    panel.style.width = getStoredWidth();
+    
+    // Check stored collapse state
+    var isCollapsed = localStorage.getItem("json_viewer_right_panel_collapsed") === "true";
+    
+    var list = document.createElement("div");
+    list.id = "history-list";
+    
+    if (isCollapsed) {
+        panel.classList.add("collapsed");
+        // Apply inline styles to prevent FOUC before CSS loads
+        panel.style.width = "36px";
+        list.style.display = "none"; 
+    } else {
+        panel.style.width = getStoredWidth();
+    }
     
     var handle = document.createElement("div");
     handle.id = "resize-handle";
@@ -207,11 +152,8 @@ function renderHistoryPanel() {
     
     var titleBlock = document.createElement("div");
     titleBlock.className = "history-title-block";
-    titleBlock.innerHTML = '<span>History Records</span><a href="#" id="clear-history-btn">Clear All</a>';
+    titleBlock.innerHTML = '<div class="history-title-group"><span class="history-toggle-icon">▼</span><span>History Records</span></div><a href="#" id="clear-history-btn">Clear All</a>';
     panel.appendChild(titleBlock);
-    
-    var list = document.createElement("div");
-    list.id = "history-list";
     
     var diffView = document.createElement("div");
     diffView.id = "diff-view";
@@ -219,6 +161,26 @@ function renderHistoryPanel() {
     panel.appendChild(list);
     panel.appendChild(diffView);
     
+    // Toggle Logic
+    var titleGroup = titleBlock.querySelector(".history-title-group");
+    titleGroup.onclick = function() {
+        var isNowCollapsed = panel.classList.toggle("collapsed");
+        localStorage.setItem("json_viewer_right_panel_collapsed", isNowCollapsed);
+        
+        if (isNowCollapsed) {
+            // CSS !important handles the width, but we can set it for consistency or animation start points
+            // list.style.display is handled by CSS !important
+        } else {
+            // Expanding: Ensure inline overrides from initialization are cleared
+            if (panel.style.width === "36px") {
+                 panel.style.width = getStoredWidth();
+            }
+            if (list.style.display === "none") {
+                 list.style.display = "";
+            }
+        }
+    };
+
     titleBlock.querySelector("#clear-history-btn").onclick = function(e) {
         e.preventDefault();
         if(confirm("Clear all history?")) {
@@ -226,6 +188,7 @@ function renderHistoryPanel() {
             loadHistoryList();
         }
     };
+
 
     var isResizing = false;
     handle.onmousedown = function(e) { isResizing = true; document.body.style.cursor = "ew-resize"; e.preventDefault(); };
@@ -275,9 +238,119 @@ function loadHistoryList() {
 }
 
 var currentJSON = null;
+var currentRawText = "";
+var currentViewMode = "parsed";
+var isAllCollapsed = false;
+
+function toggleAllNodes() {
+    var jsonContent = document.getElementById("json-content");
+    if (!jsonContent) return;
+    
+    var collapsers = jsonContent.querySelectorAll(".collapser");
+    if (collapsers.length === 0) return;
+
+    isAllCollapsed = !isAllCollapsed;
+    for (var i = 0; i < collapsers.length; i++) {
+        var parent = collapsers[i].parentElement;
+        if (isAllCollapsed) {
+            parent.classList.add("collapsed");
+        } else {
+            parent.classList.remove("collapsed");
+        }
+    }
+}
+
+function copyJSON() {
+    if (!currentJSON) return;
+    var textToCopy = (currentViewMode === "raw") ? currentRawText : JSON.stringify(currentJSON, null, 4);
+    
+    navigator.clipboard.writeText(textToCopy).then(function() {
+         var btn = document.querySelector(".btn-copy-action");
+         if(btn) {
+             var originalHTML = btn.innerHTML;
+             btn.innerHTML = "<span>✅</span>";
+             setTimeout(function() { btn.innerHTML = originalHTML; }, 1500);
+         }
+    });
+}
+
+function createToolbar() {
+    var toolbar = document.createElement("div");
+    toolbar.className = "json-toolbar";
+    toolbar.style.position = "absolute";
+    toolbar.style.top = "5px";
+    toolbar.style.right = "20px";
+    toolbar.style.zIndex = "10";
+    toolbar.style.display = "flex";
+    toolbar.style.gap = "8px";
+
+    var btnGroupView = document.createElement("div");
+    btnGroupView.className = "btn-group";
+
+    var btnParsed = document.createElement("button");
+    btnParsed.innerText = "Parsed";
+    btnParsed.className = "toolbar-btn" + (currentViewMode === "parsed" ? " active" : "");
+    btnParsed.onclick = function() { switchView("parsed"); };
+
+    var btnRaw = document.createElement("button");
+    btnRaw.innerText = "Raw";
+    btnRaw.className = "toolbar-btn" + (currentViewMode === "raw" ? " active" : "");
+    btnRaw.onclick = function() { switchView("raw"); };
+
+    btnGroupView.appendChild(btnParsed);
+    btnGroupView.appendChild(btnRaw);
+
+    var btnGroupAction = document.createElement("div");
+    btnGroupAction.className = "btn-group";
+
+    var btnToggle = document.createElement("button");
+    btnToggle.innerHTML = "<span>↕️</span>";
+    btnToggle.className = "toolbar-btn";
+    btnToggle.title = "Expand/Collapse All";
+    btnToggle.onclick = toggleAllNodes;
+
+    var btnCopy = document.createElement("button");
+    btnCopy.innerHTML = "<span>📋</span>";
+    btnCopy.className = "toolbar-btn btn-copy-action";
+    btnCopy.title = "Copy JSON";
+    btnCopy.onclick = copyJSON;
+
+    btnGroupAction.appendChild(btnToggle);
+    btnGroupAction.appendChild(btnCopy);
+
+    toolbar.appendChild(btnGroupView);
+    toolbar.appendChild(btnGroupAction);
+
+    return toolbar;
+}
+
+function switchView(mode) {
+    if (currentViewMode === mode) return;
+    currentViewMode = mode;
+    
+    var buttons = document.querySelectorAll(".toolbar-btn");
+    for(var i=0; i<buttons.length; i++) {
+        var btn = buttons[i];
+        // Only toggle active class for text buttons (Parsed/Raw), avoid messing with icon buttons
+        if (btn.innerText === "Parsed" || btn.innerText === "Raw") {
+            if (btn.innerText.toLowerCase() === mode) btn.classList.add("active");
+            else btn.classList.remove("active");
+        }
+    }
+
+    var jsonContent = document.getElementById("json-content");
+    if (!jsonContent) return;
+
+    if (mode === "parsed") {
+        jsonContent.innerHTML = jsonToHTML(currentJSON, "");
+        attachCollapsers(jsonContent);
+    } else {
+        jsonContent.innerHTML = '<pre id="raw-json">' + htmlEncode(currentRawText) + '</pre>';
+    }
+}
 
 function attachCollapsers(container) {
-    var collapsers = container.getElementsByClassName("collapser");
+    var collapsers = container.querySelectorAll(".collapser, .ellipsis");
     for (var i = 0; i < collapsers.length; i++) {
         collapsers[i].onclick = function (e) { e.stopPropagation(); this.parentElement.classList.toggle('collapsed'); };
     }
@@ -310,11 +383,16 @@ function showDiff(historyItem) {
     closeBtn.className = "diff-close-btn";
     closeBtn.onclick = function() {
         jsonContainer.innerHTML = '';
+        jsonContainer.appendChild(createToolbar());
         var content = document.createElement("div");
         content.id = "json-content";
-        content.innerHTML = jsonToHTML(currentJSON, "");
+        if (currentViewMode === "parsed") {
+            content.innerHTML = jsonToHTML(currentJSON, "");
+            attachCollapsers(content);
+        } else {
+            content.innerHTML = '<pre id="raw-json">' + htmlEncode(currentRawText) + '</pre>';
+        }
         jsonContainer.appendChild(content);
-        attachCollapsers(content);
         diffView.style.display = "none";
         list.style.display = "block";
         titleBlock.style.display = "flex";
@@ -333,6 +411,26 @@ function showDiff(historyItem) {
     list.style.display = "none";
     diffView.style.display = "block"; 
     rightPanel.style.width = "50%"; 
+
+    // Sync Scroll
+    function syncScroll(e) {
+        var other = (e.target === leftContent) ? histContainer : leftContent;
+        // Check if other is currently being scrolled by user to avoid loop (simple lock)
+        if (other.isScrolling) return;
+        
+        e.target.isScrolling = true;
+        other.scrollTop = e.target.scrollTop;
+        other.scrollLeft = e.target.scrollLeft;
+        
+        // Reset lock after short delay
+        window.cancelAnimationFrame(e.target.scrollTimeout);
+        e.target.scrollTimeout = window.requestAnimationFrame(function() {
+            e.target.isScrolling = false;
+        });
+    }
+
+    leftContent.addEventListener('scroll', syncScroll);
+    histContainer.addEventListener('scroll', syncScroll);
 }
 
 function load(){
@@ -343,6 +441,7 @@ function load(){
     }
     var rawHtml = document.body.innerText; 
     if(! test(rawHtml)) return false;
+    currentRawText = rawHtml;
     try { currentJSON = JSON.parse(rawHtml); } catch (e) { return false; }
 
     injectCustomCss("css/json.css");
@@ -353,6 +452,10 @@ function load(){
     mainContainer.id = "main-container";
     var jsonContainer = document.createElement("div");
     jsonContainer.id = "json-container";
+    jsonContainer.style.position = "relative";
+
+    jsonContainer.appendChild(createToolbar());
+
     var jsonContent = document.createElement("div");
     jsonContent.id = "json-content";
     jsonContent.innerHTML = jsonToHTML(currentJSON, "");
@@ -374,4 +477,25 @@ function injectCustomCss(cssPath) {
     document.head.appendChild(temp);
 }
 
+function applyTheme() {
+    chrome.storage.local.get({ theme: 'light' }, function(items) {
+        if (items.theme === 'dark') {
+            document.body.classList.add('theme-dark');
+        } else {
+            document.body.classList.remove('theme-dark');
+        }
+    });
+}
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    if (changes.theme) {
+        if (changes.theme.newValue === 'dark') {
+            document.body.classList.add('theme-dark');
+        } else {
+            document.body.classList.remove('theme-dark');
+        }
+    }
+});
+
 load();
+applyTheme();

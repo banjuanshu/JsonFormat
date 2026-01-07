@@ -2,27 +2,63 @@
    "manifest_version": 3,
    "name": "JSON Format - Easy & Powerful Viewer",
    "description": "Lightweight JSON formatter for Chrome. Features include collapsible trees, history records, and side-by-side comparison.",
-   "version": "2.5",
-   "content_scripts": [ {
-      "all_frames": true,
-      "matches": ["http://*/*","https://*/*","<all_urls>"],
-      "js": [  "js/viewer.js" ],
-      "run_at": "document_idle"
-   }],
-   "icons": {
-      "16": "img/json16.png",
-      "48": "img/json48.png",
-      "128": "img/json128.png"
+   "version": "3.0",
+   "content_scripts": [
+      {
+         "all_frames": true,
+         "matches": [
+            "http://*/*",
+            "https://*/*",
+            "<all_urls>"
+         ],
+         "js": [
+            "js/formatter.js",
+            "js/viewer.js"
+         ],
+         "run_at": "document_idle"
+      }
+   ],
+   "background": {
+      "service_worker": "js/background.js"
    },
-   "permissions": [
-   ],
-   "host_permissions": [
-      "*://*/*"
-   ],
+   "action": {
+      "default_title": "Open JSON Editor"
+   },
+   "commands": {
+      "open-editor": {
+         "suggested_key": {
+            "default": "Alt+J",
+            "mac": "Alt+J"
+         },
+         "description": "Open JSON Editor"
+      }
+   },
+      "icons": {
+         "16": "img/json16.png",
+         "48": "img/json48.png",
+         "128": "img/json128.png"
+      },
+      "options_ui": {
+         "page": "options.html",
+         "open_in_tab": true
+      },
+      "permissions": [
+         "storage"
+      ],
+      "host_permissions": [
+         "*://*/*"
+      ],
    "web_accessible_resources": [
       {
-         "resources": [ "/css/json.css", "/css/json-core.css" ],
-         "matches": [ "http://*/*","https://*/*","<all_urls>" ]
+         "resources": [
+            "/css/json.css",
+            "/css/json-core.css"
+         ],
+         "matches": [
+            "http://*/*",
+            "https://*/*",
+            "<all_urls>"
+         ]
       }
    ]
 }

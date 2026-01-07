@@ -10,6 +10,8 @@ const zipFile = path.join(__dirname, 'JsonFormat.zip');
 // Files/Directories to copy directly
 const staticAssets = [
     'manifest.json',
+    'editor.html',
+    'options.html',
     'img'
 ];
 

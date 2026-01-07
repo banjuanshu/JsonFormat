@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Format Options</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #333;
+        }
+        h1 {
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .option-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        select {
+            padding: 5px;
+            font-size: 14px;
+            width: 200px;
+        }
+        .status {
+            margin-top: 10px;
+            color: green;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Format Options</h1>
+    
+    <div class="option-group">
+        <label for="theme">Theme</label>
+        <select id="theme">
+            <option value="light">Light (Default)</option>
+            <option value="dark">Dark</option>
+        </select>
+    </div>
+
+    <div id="status" class="status">Options saved.</div>
+
+    <script src="js/options.js"></script>
+</body>
+</html>

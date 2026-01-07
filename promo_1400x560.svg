@@ -1,0 +1,98 @@
+<svg width="1400" height="560" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2b32b2"/>
+      <stop offset="100%" stop-color="#1488cc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="8" stdDeviation="10" flood-opacity="0.4"/>
+    </filter>
+    <style>
+      .title { font-family: Arial; font-size: 80px; font-weight: bold; fill: #ffffff; }
+      .subtitle { font-family: Arial; font-size: 36px; fill: #e0e0e0; }
+      .feature { font-family: Arial; font-size: 24px; fill: #a0cfff; font-weight: 500; }
+      .code-bg { fill: #1e1e1e; rx: 12; ry: 12; filter: url(#shadow); }
+      .code-text { font-family: monospace; font-size: 20px; font-weight: 500; }
+      .key { fill: #9cdcfe; }
+      .string { fill: #ce9178; }
+      .number { fill: #b5cea8; }
+      .boolean { fill: #569cd6; }
+      .null { fill: #569cd6; }
+      .bracket { fill: #d4d4d4; }
+      .comment { fill: #6a9955; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="560" fill="url(#bg-gradient)"/>
+
+  <!-- Left Content Area -->
+  <g transform="translate(100, 100)">
+    <!-- Logo -->
+    <image href="data:image/png;base64,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" x="0" y="-10" width="128" height="128"/>
+    
+    <text x="0" y="190" class="title">JSON Format</text>
+    <text x="0" y="240" class="subtitle">Easy &amp; Powerful Viewer</text>
+    
+    <g transform="translate(0, 300)">
+        <path d="M5,12 L15,22 L35,2" fill="none" stroke="#27c93f" stroke-width="4"/>
+        <text x="50" y="15" class="feature">Auto Formatting</text>
+    </g>
+    <g transform="translate(0, 350)">
+        <path d="M5,12 L15,22 L35,2" fill="none" stroke="#27c93f" stroke-width="4"/>
+        <text x="50" y="15" class="feature">History &amp; Diff Tool</text>
+    </g>
+    <g transform="translate(0, 400)">
+        <path d="M5,12 L15,22 L35,2" fill="none" stroke="#27c93f" stroke-width="4"/>
+        <text x="50" y="15" class="feature">Manifest V3 Ready</text>
+    </g>
+  </g>
+
+  <!-- Right Code Window -->
+  <g transform="translate(600, 60)">
+    <rect width="700" height="440" class="code-bg"/>
+    
+    <!-- Window Controls -->
+    <g transform="translate(20, 20)">
+        <circle cx="10" cy="10" r="8" fill="#ff5f56"/>
+        <circle cx="35" cy="10" r="8" fill="#ffbd2e"/>
+        <circle cx="60" cy="10" r="8" fill="#27c93f"/>
+    </g>
+
+    <!-- Code Content -->
+    <g transform="translate(40, 70)">
+        <text y="0" class="code-text"><tspan class="bracket">{</tspan></text>
+        <text y="35" class="code-text" x="30">
+            <tspan class="key">"name"</tspan><tspan class="bracket">: </tspan><tspan class="string">"JSON Format"</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="70" class="code-text" x="30">
+            <tspan class="key">"manifest_version"</tspan><tspan class="bracket">: </tspan><tspan class="number">3</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="105" class="code-text" x="30">
+            <tspan class="key">"features"</tspan><tspan class="bracket">: {</tspan>
+        </text>
+        <text y="140" class="code-text" x="60">
+            <tspan class="key">"syntax_highlight"</tspan><tspan class="bracket">: </tspan><tspan class="boolean">true</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="175" class="code-text" x="60">
+            <tspan class="key">"collapsible_nodes"</tspan><tspan class="bracket">: </tspan><tspan class="boolean">true</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="210" class="code-text" x="60">
+            <tspan class="key">"clickable_urls"</tspan><tspan class="bracket">: </tspan><tspan class="boolean">true</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="245" class="code-text" x="60">
+            <tspan class="key">"themes"</tspan><tspan class="bracket">: [</tspan><tspan class="string">"Dark"</tspan><tspan class="bracket">, </tspan><tspan class="string">"Light"</tspan><tspan class="bracket">]</tspan>
+        </text>
+        <text y="280" class="code-text" x="30">
+            <tspan class="bracket">},</tspan>
+        </text>
+        <text y="315" class="code-text" x="30">
+            <tspan class="key">"rating"</tspan><tspan class="bracket">: </tspan><tspan class="number">5.0</tspan><tspan class="bracket">,</tspan>
+        </text>
+        <text y="350" class="code-text" x="30">
+            <tspan class="key">"user"</tspan><tspan class="bracket">: </tspan><tspan class="null">null</tspan> <tspan class="comment">// Privacy Focused</tspan>
+        </text>
+        <text y="385" class="code-text"><tspan class="bracket">}</tspan></text>
+    </g>
+  </g>
+</svg>

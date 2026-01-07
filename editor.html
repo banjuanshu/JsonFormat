@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Editor</title>
+    <link rel="stylesheet" href="css/json-core.css">
+    <link rel="stylesheet" href="css/json.css">
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+<div id="input-pane">
+    <textarea id="json-input" placeholder="Paste JSON here..."></textarea>
+    <div id="error-msg"></div>
+</div>
+
+<div id="output-wrapper">
+    <div id="editor-toolbar" class="json-toolbar">
+        <div class="btn-group">
+            <button id="btn-toggle-nodes" class="toolbar-btn">
+                <span>↕️</span> <span>Expand/Collapse</span>
+            </button>
+            <button id="btn-copy" class="toolbar-btn">
+                <span>📋</span> <span>Copy</span>
+            </button>
+        </div>
+    </div>
+    <div id="output-pane">
+        <div id="json"></div>
+    </div>
+</div>
+
+<script src="js/formatter.js"></script>
+<script src="js/editor.js"></script>
+</body>
+</html>
